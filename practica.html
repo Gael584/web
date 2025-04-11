@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="widht=device-width, initial-scale=1.0">
+        <title>CItas Inspiradoras</title>
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #bb8282;
+                margin: 0;            
+            }
+            .container {
+                text-align: center;
+                background-color: #985858;
+                border-radius: 8px;
+                padding: 20px;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            }
+            .quote {
+                font-size: 2em;
+                margin-bottom: 20px;
+                font-style: italic;
+                color: #333;
+            }
+            .author {
+                font-size: 2em;
+                color: #120b0b;
+                margin-top: 20px;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+                background-color: #07111b;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="quote" class="quote"></div>
+            <div id="author" class="author"></div>
+            <button onclick="showRandomQuote()">Mostrar otra palabra</button>
+        </div>
+
+        <script>
+
+            const quotes = [
+                { text: "El unico modo de hacer un gran trabajo es amar lo que haces.", author: "Steve Jobs"},
+                { text: "La vida es 10% lo que me ocurre y 90% como reacciono ante ello.", author: "Charles R. Swindoll"},
+                { text: "No cuentes los dias, haz que los dias cuenten.", author: "Muhammad Ali"},
+                { text: "El exito es la suma de pequenos esfuerzos repetidos dia tras dia.", author: "Robert Collier"},
+                { text: "Haz hoy lo que otros no quieren , haz manana lo que otros no pueden.", author: "Jerry Rice"},
+                { text: "El futuro pertenece a quienes creen en la belleza de sus suenos", author: "Eleanor Roosevelt"},
+                { text: "Lo que no te mata te hace mas fuerte", author: "Friedrich Nietzsche"},
+                { text: "Cree en ti mismo y todo sera posible", author: "Eliza Dushku"},
+                { text: "Nunca es demasiado tarde para ser lo que podrias haber sido", author: "George Eliot"},
+                { text: "No puedes matar lo que ya esta muerto", author: "Adam Sandler"},
+
+            ];
+
+            function showRandomQuote(){
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                const randomQuote = quotes[randomIndex];
+
+
+                document.getElementById("quote").innerText =`"${randomQuote.text}"`;
+                documen.getElementById("author").innerText =`-${randomQuote.author}`;
+
+                localStorage.setItem("lastQuote", JSON.stringify(randomQuote));
+
+            }
+            function loadLastQuote(){
+                const lastQuote = localStorage.getItem(lastQuote);
+                if (lastQuote){
+                    const parsedQuote = JSON.parse(lastQuote);
+                    document.getElementById("quote").innerText = `"$(parsedQuote.text)"`;
+                    document.getElementById("author").innerText =`-${parsedQuote.author}`;
+                }else{
+                    showRandomQuote();
+                }
+            }
+            window.onload = loadLastQuote;
+        </script>
+    </body>
+</html>
